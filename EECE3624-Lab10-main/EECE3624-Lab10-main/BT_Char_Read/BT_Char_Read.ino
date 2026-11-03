@@ -36,11 +36,22 @@ void setup() {
 
 void loop() {
   digitalWrite(led,HIGH);
-  delay(1000);
+  delay(10);
   digitalWrite(led,LOW);
-  delay(1000);
+  delay(10);
   if (bluetooth.available()) {  
     incomingByte = (unsigned char) bluetooth.read();
-    Serial.write(incomingByte);
+
+        // Check for carriage return or newline
+    if (incomingByte == 13 || incomingByte == '\r') {
+      Serial.println();  // Move to new line for CR
+    } 
+    else if (incomingByte == 10 || incomingByte == '\n') {
+      Serial.println();  // Move to new line for NL
+    } 
+    else {
+      Serial.write(incomingByte);  // Print the character normally
+    }
+
   }
 }

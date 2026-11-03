@@ -87,6 +87,7 @@ int main(void) {
 		{
 			case CR:
 				// send back both CR and LF (makes PuTTY work without having to assume CRs w/ LFs)
+				uart0_tx(rcvdChar);
 				uart_tx(CR);	// echo char back to sender
 				uart_tx(LF);	// echo char back to sender
 				break;					
